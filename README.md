@@ -1,1 +1,1 @@
-# Basic and Beginners/Intermmediate React JS projects 
+# Basic and Beginners / Intermmediate React JS projects 

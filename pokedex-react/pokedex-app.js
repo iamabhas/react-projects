@@ -1,35 +1,39 @@
 import React, { useState, useEffect } from "react";
-import "./pokedex.css";
+import "./styles.css";
 
 export default function App() {
   const [count, setCount] = useState(1);
-
-  useEffect(() => {
-    async function getPokemon(id) {
-      const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
-      const res = await fetch(url);
-      const pokemon = await res.json();
-      let pokename = pokemon.name;
-      let pokeimg = pokemon.sprites.front_default;
-      document.querySelector(".name").textContent = pokename;
-      document.querySelector(".image").src = pokeimg;
+  const [pokeName, setPokeName] = useState();
+  const [pokeImg, setPokeImg] = useState();
+  async function getPokemon(id) {
+    const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+    const res = await fetch(url);
+    const pokemon = await res.json();
+    let pokename = pokemon.name;
+    function capitalize(s) {
+      return s[0].toUpperCase() + s.slice(1);
     }
+    let pokeimg = pokemon.sprites.front_default;
+    setPokeName(capitalize(pokename));
+    setPokeImg(pokeimg);
+  }
+  useEffect(() => {
     getPokemon(count);
-  });
+  }, [count]);
   function dec() {
     if (count <= 1) {
-      return setCount(1);
+      setCount(1);
     } else {
-      return setCount(count - 1);
+      setCount(count - 1);
     }
   }
   return (
     <div className="App">
       <article className="number">{count}</article>
       <section>
-        <img className="image" src="" />
+        <img className="image" src={pokeImg} />
       </section>
-      <div className="name"></div>
+      <div className="name">{pokeName}</div>
 
       <div className="btn-container">
         <button className="btn" onClick={dec}>
@@ -46,11 +50,7 @@ export default function App() {
         <button
           className="btn"
           onClick={() => {
-            if (count >= 150) {
-              return setCount(150);
-            } else {
-              return setCount(count + 1);
-            }
+            setCount(count + 1);
           }}
         >
           <img src="https://img.icons8.com/ios/50/000000/plus--v1.png" />

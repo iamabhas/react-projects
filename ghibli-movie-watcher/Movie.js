@@ -8,6 +8,7 @@ const Movie = ({
   director,
   release_date,
   description,
+  watch_link,
   removeMovie
 }) => {
   const [readMore, setReadMore] = useState(false);
@@ -19,7 +20,7 @@ const Movie = ({
       </h2>
       <img src={image} alt={title} />
       <div className="buttons">
-        <a href="#" className="link">
+        <a href={watch_link} target="_blank" className="link">
           ▶ Watch now
         </a>
         <button

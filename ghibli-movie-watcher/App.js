@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./styles.css";
 import Movies from "./Movies";
-const url = "https://ghibliapi.herokuapp.com/films/";
+const url = "https://ghibli-movie-watcher-api.herokuapp.com/ghibli_movies";
 export default function App() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
